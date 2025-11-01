@@ -12,32 +12,37 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fff;
-            max-width: 800px;
+            font-family: 'Crimson Text', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HG明朝E', 'MS P明朝', 'MS 明朝', serif;
+            font-size: 18px;
+            line-height: 2;
+            color: #1a1a1a;
+            background-color: #fafafa;
+            max-width: 680px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
+            letter-spacing: 0.02em;
         }
         
         header {
             text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid #333;
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #d0d0d0;
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 300;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.05em;
         }
-        
+
         .subtitle {
-            font-size: 1.1rem;
-            color: #666;
-            font-weight: 400;
+            font-size: 0.9rem;
+            color: #888;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
         }
         
         .section {
@@ -46,10 +51,11 @@
         
         .section h2 {
             font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #d0d0d0;
+            letter-spacing: 0.03em;
         }
         
         .links {
@@ -61,56 +67,63 @@
         }
         
         .links a {
-            color: #333;
+            color: #1a1a1a;
             text-decoration: none;
             padding: 0.5rem 0;
             display: inline-block;
             border-bottom: 1px solid transparent;
-            transition: border-bottom-color 0.3s ease;
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
         }
-        
+
         .links a:hover {
-            border-bottom-color: #333;
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
         }
         
         .achievements {
-            background-color: #f9f9f9;
+            background-color: #f8f8f8;
             padding: 1.5rem;
-            border-left: 4px solid #333;
+            border-left: 2px solid #d0d0d0;
             margin-bottom: 1rem;
         }
-        
+
         .achievements h3 {
             font-size: 1.1rem;
-            font-weight: 500;
+            font-weight: 300;
             margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
         }
-        
+
         .achievements p {
             color: #666;
             font-size: 0.95rem;
         }
         
         footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 2px solid #333;
+            margin-top: 6rem;
+            padding-top: 3rem;
+            border-top: 1px solid #d0d0d0;
             text-align: center;
         }
-        
+
         .social-link {
             display: inline-block;
             margin: 0 1rem;
-            padding: 0.8rem 1.5rem;
-            background-color: #333;
-            color: #fff !important;
+            padding: 0.6rem 2rem;
+            background-color: transparent;
+            color: #1a1a1a !important;
             text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
+            border: 1px solid #d0d0d0;
+            transition: all 0.3s ease;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
         }
-        
+
         .social-link:hover {
-            background-color: #555;
+            background-color: #1a1a1a;
+            color: #fafafa !important;
+            border-color: #1a1a1a;
         }
         
         .contact-info {
@@ -119,21 +132,26 @@
             font-size: 0.9rem;
         }
         
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             body {
-                padding: 1rem;
+                font-size: 17px;
+                padding: 2rem 1.5rem;
             }
-            
+
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
-            
+
             .social-link {
                 display: block;
-                margin: 0.5rem 0;
+                margin: 0.5rem auto;
+                max-width: 200px;
             }
         }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8597620277601663" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -156,13 +174,19 @@
             <h2>登壇実績 / Speaking Achievements</h2>
             <ul class="links">
                 <li><a href="https://speakerdeck.com/macotasu" target="_blank">SpeakerDeck - MacoTasu</a></li>
-                    <li>
-                        <a href="https://speakerdeck.com/hacomono/rails-x-moziyuramonorisu" target="_blank">Rails x モジュラーモノリス (SpeakerDeck)</a>
-                        <ul class="links" style="margin-top:0.5rem; margin-left:1.5rem;">
-                            <li><a href="https://techblog.hacomono.jp/entry/2023/08/22/110000" target="_blank">Railsでモジュラーモノリスを実現するための設計と実践 (2023/08/22)</a></li>
-                            <li><a href="https://techblog.hacomono.jp/entry/2025/08/15/110000" target="_blank">モジュラーモノリスの設計・運用のリアル (2025/08/15)</a></li>
-                        </ul>
-                    </li>
+                <li>
+                    <a href="https://findy.connpass.com/event/371331/" target="_blank">Findy #技術組織を語る「アーキテクチャ年表 - 各社の意思決定の変遷と葛藤」(2025/01)</a>
+                    <ul class="links" style="margin-top:0.5rem; margin-left:1.5rem;">
+                        <li><a href="https://speakerdeck.com/hacomono/business_growth_and_the_evolution_of_hacomono_architecture" target="_blank">事業成長とHACOMONOアーキテクチャの進化 (SpeakerDeck)</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://speakerdeck.com/hacomono/rails-x-moziyuramonorisu" target="_blank">Rails x モジュラーモノリス (SpeakerDeck)</a>
+                    <ul class="links" style="margin-top:0.5rem; margin-left:1.5rem;">
+                        <li><a href="https://techblog.hacomono.jp/entry/2023/08/22/110000" target="_blank">Railsでモジュラーモノリスを実現するための設計と実践 (2023/08/22)</a></li>
+                        <li><a href="https://techblog.hacomono.jp/entry/2025/08/15/110000" target="_blank">モジュラーモノリスの設計・運用のリアル (2025/08/15)</a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
 
