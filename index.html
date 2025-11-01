@@ -131,7 +131,45 @@
             color: #666;
             font-size: 0.9rem;
         }
-        
+
+        details {
+            margin-bottom: 0.8rem;
+        }
+
+        summary {
+            cursor: pointer;
+            color: #1a1a1a;
+            padding: 0.5rem 0;
+            display: inline-block;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+            list-style: none;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::before {
+            content: '▸ ';
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        summary:hover {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        details ul {
+            margin-top: 0.5rem;
+        }
+
         @media (max-width: 768px) {
             body {
                 font-size: 17px;
@@ -175,17 +213,23 @@
             <ul class="links">
                 <li><a href="https://speakerdeck.com/macotasu" target="_blank">SpeakerDeck - MacoTasu</a></li>
                 <li>
-                    <a href="https://findy.connpass.com/event/371331/" target="_blank">Findy #技術組織を語る「アーキテクチャ年表 - 各社の意思決定の変遷と葛藤」(2025/01)</a>
-                    <ul class="links" style="margin-top:0.5rem; margin-left:1.5rem;">
-                        <li><a href="https://speakerdeck.com/hacomono/business_growth_and_the_evolution_of_hacomono_architecture" target="_blank">事業成長とHACOMONOアーキテクチャの進化 (SpeakerDeck)</a></li>
-                    </ul>
+                    <details>
+                        <summary>Findy #技術組織を語る「アーキテクチャ年表 - 各社の意思決定の変遷と葛藤」(2025/01)</summary>
+                        <ul class="links" style="margin-top:0.5rem; margin-left:1.5rem;">
+                            <li><a href="https://findy.connpass.com/event/371331/" target="_blank">イベントページ (connpass)</a></li>
+                            <li><a href="https://speakerdeck.com/hacomono/business_growth_and_the_evolution_of_hacomono_architecture" target="_blank">事業成長とHACOMONOアーキテクチャの進化 (SpeakerDeck)</a></li>
+                        </ul>
+                    </details>
                 </li>
                 <li>
-                    <a href="https://speakerdeck.com/hacomono/rails-x-moziyuramonorisu" target="_blank">Rails x モジュラーモノリス (SpeakerDeck)</a>
-                    <ul class="links" style="margin-top:0.5rem; margin-left:1.5rem;">
-                        <li><a href="https://techblog.hacomono.jp/entry/2023/08/22/110000" target="_blank">Railsでモジュラーモノリスを実現するための設計と実践 (2023/08/22)</a></li>
-                        <li><a href="https://techblog.hacomono.jp/entry/2025/08/15/110000" target="_blank">モジュラーモノリスの設計・運用のリアル (2025/08/15)</a></li>
-                    </ul>
+                    <details>
+                        <summary>Rails x モジュラーモノリス</summary>
+                        <ul class="links" style="margin-top:0.5rem; margin-left:1.5rem;">
+                            <li><a href="https://speakerdeck.com/hacomono/rails-x-moziyuramonorisu" target="_blank">Rails x モジュラーモノリス (SpeakerDeck)</a></li>
+                            <li><a href="https://techblog.hacomono.jp/entry/2023/08/22/110000" target="_blank">Railsでモジュラーモノリスを実現するための設計と実践 (2023/08/22)</a></li>
+                            <li><a href="https://techblog.hacomono.jp/entry/2025/08/15/110000" target="_blank">モジュラーモノリスの設計・運用のリアル (2025/08/15)</a></li>
+                        </ul>
+                    </details>
                 </li>
             </ul>
         </section>
