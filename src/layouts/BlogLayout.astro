@@ -1,0 +1,316 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - maco.life</title>
+    <meta name="description" content={description}>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: #fafafa;
+        }
+
+        body {
+            font-family: 'Crimson Text', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HG明朝E', 'MS P明朝', 'MS 明朝', serif;
+            font-size: 18px;
+            line-height: 2;
+            color: #1a1a1a;
+            background-color: #fafafa;
+            letter-spacing: 0.02em;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 3rem 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #d0d0d0;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #888;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: #555;
+            text-decoration: none;
+            padding: 0.3rem 0;
+            display: inline-block;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+
+        nav a:hover {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        main {
+            margin-bottom: 4rem;
+        }
+
+        article {
+        }
+
+        article h1, article h2, article h3 {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.03em;
+            line-height: 1.4;
+        }
+
+        article h1 {
+            font-size: 2rem;
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-top: 0;
+        }
+
+        article h2 {
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        article h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 3rem;
+            height: 1px;
+            background-color: #d0d0d0;
+        }
+
+        article h3 {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        article p {
+            margin-bottom: 1.5rem;
+        }
+
+        article p:first-of-type::first-letter {
+            font-size: 3.5em;
+            line-height: 0.9;
+            float: left;
+            margin: 0.1em 0.1em 0 0;
+            font-weight: 300;
+        }
+
+        article ul, article ol {
+            margin-bottom: 1.5rem;
+            margin-left: 2.5rem;
+            line-height: 2.2;
+        }
+
+        article li {
+            margin-bottom: 0.8rem;
+        }
+
+        article pre {
+            background-color: #f8f8f8;
+            border-left: 2px solid #d0d0d0;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        article code {
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            background-color: #f8f8f8;
+            padding: 0.15rem 0.4rem;
+            font-size: 0.88em;
+            letter-spacing: 0;
+            border: 1px solid #e8e8e8;
+        }
+
+        article pre code {
+            background-color: transparent;
+            padding: 0;
+            border: none;
+        }
+
+        article blockquote {
+            border-left: 2px solid #d0d0d0;
+            padding-left: 2rem;
+            margin: 2rem 0;
+            color: #666;
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+
+        article a {
+            color: #1a1a1a;
+            text-decoration: none;
+            border-bottom: 1px solid #d0d0d0;
+            transition: border-color 0.3s ease;
+        }
+
+        article a:hover {
+            border-bottom-color: #1a1a1a;
+        }
+
+        article img {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+            display: block;
+        }
+
+        .tags {
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            display: inline-block;
+            color: #666;
+            padding: 0.2rem 0;
+            margin: 0 0.8rem;
+            font-size: 0.85rem;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        .date {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+        }
+
+        footer {
+            margin-top: 6rem;
+            padding-top: 3rem;
+            border-top: 1px solid #d0d0d0;
+            text-align: center;
+        }
+
+        .social-link {
+            display: inline-block;
+            margin: 0 1rem;
+            padding: 0.6rem 2rem;
+            background-color: transparent;
+            color: #1a1a1a !important;
+            text-decoration: none;
+            border: 1px solid #d0d0d0;
+            transition: all 0.3s ease;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+        }
+
+        .social-link:hover {
+            background-color: #1a1a1a;
+            color: #fafafa !important;
+            border-color: #1a1a1a;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 17px;
+                padding: 2rem 1.5rem;
+                line-height: 1.9;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            article h1 {
+                font-size: 1.6rem;
+            }
+
+            article h2 {
+                font-size: 1.3rem;
+            }
+
+            article p:first-of-type::first-letter {
+                font-size: 2.5em;
+            }
+
+            .social-link {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 200px;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8597620277601663" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>maco.life</h1>
+            <p class="subtitle">日常の記録</p>
+        </header>
+
+        <nav>
+            <a href="/">← ホームに戻る</a> | <a href="/blog">ブログ一覧</a> | <a href="/blog/tags">タグ一覧</a>
+        </nav>
+
+        <main>
+            <slot />
+        </main>
+
+        <footer>
+            <a href="https://x.com/Maco_Tasu" class="social-link" target="_blank">X (Twitter)</a>
+        </footer>
+    </div>
+</body>
+</html>

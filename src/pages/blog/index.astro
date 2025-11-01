@@ -1,0 +1,142 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+const allBlogPosts = await getCollection('blog', ({ data }) => {
+  return data.draft !== true;
+});
+
+// 日付の新しい順にソート
+const sortedPosts = allBlogPosts.sort((a, b) => {
+  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+});
+---
+
+<BlogLayout
+  title="ブログ一覧"
+  description="maco.life - 日常の記録"
+>
+  <h1 style="margin-bottom: 3rem;">ブログ記事</h1>
+
+  {sortedPosts.length === 0 ? (
+    <p style="color: #666; margin-top: 2rem;">まだ記事がありません。</p>
+  ) : (
+    <div class="post-list">
+      {sortedPosts.map(post => {
+        const formattedDate = new Date(post.data.date).toLocaleDateString('ja-JP', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+
+        return (
+          <article class="post-item">
+            <h2>
+              <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+            </h2>
+            <div class="post-meta">
+              <span class="post-date">{formattedDate}</span>
+              {post.data.tags.length > 0 && (
+                <span class="post-tags">
+                  {post.data.tags.map(tag => (
+                    <a href={`/blog/tags/${tag}`} class="tag">#{tag}</a>
+                  ))}
+                </span>
+              )}
+            </div>
+            <p class="post-description">{post.data.description}</p>
+          </article>
+        );
+      })}
+    </div>
+  )}
+</BlogLayout>
+
+<style>
+  .post-list {
+    margin-top: 3rem;
+  }
+
+  .post-item {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-item h2 {
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  .post-item h2 a {
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+    padding-bottom: 0.2rem;
+  }
+
+  .post-item h2 a:hover {
+    border-bottom-color: #1a1a1a;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .post-date {
+    color: #888;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    color: #666;
+    padding: 0;
+    font-size: 0.85rem;
+    border: none;
+    background: none;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    color: #1a1a1a;
+    border-bottom-color: #1a1a1a;
+  }
+
+  .post-description {
+    color: #555;
+    line-height: 1.9;
+  }
+
+  @media (max-width: 768px) {
+    .post-item h2 {
+      font-size: 1.4rem;
+    }
+
+    .post-meta {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  }
+</style>

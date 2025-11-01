@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+
+const allBlogPosts = await getCollection('blog', ({ data }) => {
+  return data.draft !== true;
+});
+
+// すべてのタグを収集し、記事数をカウント
+const tagCounts = allBlogPosts.reduce((acc, post) => {
+  post.data.tags.forEach(tag => {
+    acc[tag] = (acc[tag] || 0) + 1;
+  });
+  return acc;
+}, {} as Record<string, number>);
+
+// タグを記事数の多い順にソート
+const sortedTags = Object.entries(tagCounts)
+  .sort(([, a], [, b]) => b - a)
+  .map(([tag, count]) => ({ tag, count }));
+---
+
+<BlogLayout
+  title="タグ一覧"
+  description="maco.life - タグ一覧"
+>
+  <h1 style="margin-bottom: 3rem;">タグ一覧</h1>
+
+  {sortedTags.length === 0 ? (
+    <p style="color: #666;">タグがありません。</p>
+  ) : (
+    <div class="tag-list">
+      {sortedTags.map(({ tag, count }) => (
+        <div class="tag-item">
+          <a href={`/blog/tags/${tag}`} class="tag-link">
+            <span class="tag-name">#{tag}</span>
+            <span class="tag-count">{count}件</span>
+          </a>
+        </div>
+      ))}
+    </div>
+  )}
+</BlogLayout>
+
+<style>
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .tag-item {
+    flex: 0 0 auto;
+  }
+
+  .tag-link {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid #d0d0d0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: #1a1a1a;
+  }
+
+  .tag-link:hover {
+    background-color: #1a1a1a;
+    color: #fafafa;
+    border-color: #1a1a1a;
+  }
+
+  .tag-name {
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .tag-count {
+    font-size: 0.8rem;
+    color: #888;
+    letter-spacing: 0.05em;
+  }
+
+  .tag-link:hover .tag-count {
+    color: #ccc;
+  }
+
+  @media (max-width: 768px) {
+    .tag-list {
+      gap: 1rem;
+    }
+
+    .tag-link {
+      padding: 0.6rem 1.2rem;
+    }
+
+    .tag-name {
+      font-size: 0.9rem;
+    }
+  }
+</style>

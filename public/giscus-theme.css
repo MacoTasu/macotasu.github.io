@@ -1,0 +1,110 @@
+/* カリグラフィー風 giscus テーマ */
+
+:root {
+  --color-prettylights-syntax-comment: #888;
+  --color-prettylights-syntax-constant: #1a1a1a;
+  --color-prettylights-syntax-entity: #1a1a1a;
+  --color-prettylights-syntax-storage-modifier-import: #1a1a1a;
+  --color-prettylights-syntax-entity-tag: #1a1a1a;
+  --color-prettylights-syntax-keyword: #1a1a1a;
+  --color-prettylights-syntax-string: #555;
+  --color-prettylights-syntax-variable: #1a1a1a;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #1a1a1a;
+  --color-prettylights-syntax-invalid-illegal-text: #1a1a1a;
+  --color-prettylights-syntax-invalid-illegal-bg: #fafafa;
+  --color-prettylights-syntax-carriage-return-text: #1a1a1a;
+  --color-prettylights-syntax-carriage-return-bg: #fafafa;
+  --color-prettylights-syntax-string-regexp: #1a1a1a;
+  --color-prettylights-syntax-markup-list: #1a1a1a;
+  --color-prettylights-syntax-markup-heading: #1a1a1a;
+  --color-prettylights-syntax-markup-italic: #1a1a1a;
+  --color-prettylights-syntax-markup-bold: #1a1a1a;
+  --color-prettylights-syntax-markup-deleted-text: #1a1a1a;
+  --color-prettylights-syntax-markup-deleted-bg: #fafafa;
+  --color-prettylights-syntax-markup-inserted-text: #1a1a1a;
+  --color-prettylights-syntax-markup-inserted-bg: #fafafa;
+  --color-prettylights-syntax-markup-changed-text: #1a1a1a;
+  --color-prettylights-syntax-markup-changed-bg: #fafafa;
+  --color-prettylights-syntax-markup-ignored-text: #888;
+  --color-prettylights-syntax-markup-ignored-bg: #fafafa;
+  --color-prettylights-syntax-meta-diff-range: #1a1a1a;
+  --color-prettylights-syntax-brackethighlighter-angle: #888;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #888;
+  --color-prettylights-syntax-constant-other-reference-link: #1a1a1a;
+
+  --color-fg-default: #1a1a1a;
+  --color-fg-muted: #666;
+  --color-fg-subtle: #888;
+  --color-canvas-default: #fafafa;
+  --color-canvas-subtle: #f8f8f8;
+  --color-border-default: #d0d0d0;
+  --color-border-muted: #e8e8e8;
+  --color-neutral-muted: rgba(208, 208, 208, 0.1);
+  --color-accent-fg: #1a1a1a;
+  --color-accent-emphasis: #1a1a1a;
+  --color-success-fg: #1a1a1a;
+  --color-attention-fg: #666;
+  --color-attention-subtle: #f8f8f8;
+  --color-danger-fg: #1a1a1a;
+  --color-primer-shadow-inset: inset 0 1px 0 rgba(208, 208, 208, 0.1);
+  --color-scale-gray-1: #fafafa;
+  --color-scale-blue-1: #f8f8f8;
+}
+
+/* フォントファミリー */
+main {
+  font-family: 'Crimson Text', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+/* ボタンとリンク */
+a {
+  color: #1a1a1a;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+a:hover {
+  border-bottom-color: #1a1a1a;
+}
+
+button {
+  font-family: 'Crimson Text', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif;
+  letter-spacing: 0.05em;
+}
+
+/* 境界線を細く */
+.pagination-loader-container,
+.gsc-comments > .gsc-header,
+.gsc-comment-box,
+.gsc-comment,
+.gsc-reply {
+  border-width: 1px !important;
+  border-color: #d0d0d0 !important;
+}
+
+/* リアクションボタン */
+.gsc-reactions-count {
+  border: 1px solid #d0d0d0;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.gsc-reactions-count:hover {
+  background-color: #1a1a1a;
+  color: #fafafa;
+  border-color: #1a1a1a;
+}
+
+/* テキストエリア */
+textarea {
+  font-family: 'Crimson Text', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif;
+  line-height: 1.8;
+  border: 1px solid #d0d0d0 !important;
+}
+
+textarea:focus {
+  border-color: #1a1a1a !important;
+}

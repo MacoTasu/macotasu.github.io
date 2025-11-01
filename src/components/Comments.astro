@@ -1,0 +1,55 @@
+---
+// giscus コメント・いいね機能
+// 設定: https://giscus.app/ja
+---
+
+<div class="comments-section">
+  <div class="comments-divider"></div>
+
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="MacoTasu/macotasu.github.io"
+    data-repo-id="R_kgDOI0g_Aw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOI0g_A84CxVTF"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="https://macotasu.github.io/giscus-theme.css"
+    data-lang="ja"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+<style>
+  .comments-section {
+    margin-top: 6rem;
+  }
+
+  .comments-divider {
+    width: 3rem;
+    height: 1px;
+    background-color: #d0d0d0;
+    margin: 0 auto 3rem;
+  }
+
+  /* giscus のスタイルをカリグラフィー風に調整 */
+  :global(.giscus) {
+    font-family: 'Crimson Text', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif;
+  }
+
+  :global(.giscus-frame) {
+    border: none !important;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .comments-section {
+      margin-top: 4rem;
+    }
+  }
+</style>
