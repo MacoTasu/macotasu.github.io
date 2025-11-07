@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+
+const allFavorites = await getCollection('sparkles');
+
+// 全てのタグを収集してカウント
+const tagCounts = new Map<string, number>();
+allFavorites.forEach(favorite => {
+  favorite.data.tags.forEach(tag => {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  });
+});
+
+// タグを名前順にソート
+const sortedTags = Array.from(tagCounts.entries())
+  .sort((a, b) => a[0].localeCompare(b[0], 'ja'));
+---
+
+<BlogLayout
+  title="タグ一覧 - 記録"
+  description="記録のタグ一覧"
+>
+  <h1 style="margin-bottom: 3rem;">タグ一覧</h1>
+
+  {sortedTags.length === 0 ? (
+    <p style="color: #666; margin-top: 2rem;">まだタグがありません。</p>
+  ) : (
+    <div class="tag-list">
+      {sortedTags.map(([tag, count]) => (
+        <div class="tag-item">
+          <a href={`/sparkles/tags/${tag}`} class="tag-link">
+            <span class="tag-name">#{tag}</span>
+            <span class="tag-count">({count})</span>
+          </a>
+        </div>
+      ))}
+    </div>
+  )}
+
+  <div class="back-link">
+    <a href="/sparkles">← 記録一覧に戻る</a>
+  </div>
+</BlogLayout>
+
+<style>
+  .tag-list {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .tag-item {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .tag-item:last-child {
+    border-bottom: none;
+  }
+
+  .tag-link {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+  }
+
+  .tag-link:hover {
+    color: #666;
+  }
+
+  .tag-name {
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .tag-count {
+    color: #888;
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+
+  .back-link {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .back-link a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .back-link a:hover {
+    color: #1a1a1a;
+    border-bottom-color: #1a1a1a;
+  }
+
+  @media (max-width: 768px) {
+    .tag-name {
+      font-size: 1.1rem;
+    }
+  }
+</style>

@@ -1,0 +1,210 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const favorites = await getCollection('sparkles');
+  return favorites.map(favorite => ({
+    params: { slug: favorite.slug },
+    props: { favorite },
+  }));
+}
+
+const { favorite } = Astro.props;
+const { Content } = await favorite.render();
+
+const formattedDate = new Date(favorite.data.date).toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// URLからOGP情報を取得する関数（簡易版）
+function getUrlPreview(url: string) {
+  // YouTubeのサムネイル取得
+  const youtubeMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+  if (youtubeMatch) {
+    return {
+      type: 'youtube',
+      thumbnail: `https://img.youtube.com/vi/${youtubeMatch[1]}/maxresdefault.jpg`,
+      videoId: youtubeMatch[1]
+    };
+  }
+
+  // その他のURLの場合
+  return {
+    type: 'web',
+    thumbnail: null
+  };
+}
+
+const preview = getUrlPreview(favorite.data.url);
+---
+
+<BlogLayout
+  title="記録 - Sparkles"
+  description={favorite.data.description || "感動したもの"}
+>
+  <article>
+    <div class="favorite-header">
+      <div class="date">{formattedDate}</div>
+
+      {favorite.data.tags.length > 0 && (
+        <div class="tags">
+          {favorite.data.tags.map(tag => (
+            <a href={`/sparkles/tags/${tag}`} class="tag">#{tag}</a>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div class="favorite-content">
+      {preview.type === 'youtube' && preview.videoId && (
+        <div class="video-container">
+          <iframe
+            src={`https://www.youtube.com/embed/${preview.videoId}`}
+            title="YouTube video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      )}
+
+      {preview.type === 'web' && (
+        <div class="link-card">
+          <a href={favorite.data.url} target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            {favorite.data.url}
+          </a>
+        </div>
+      )}
+
+      <div class="description">
+        <Content />
+      </div>
+    </div>
+
+    <div class="back-link">
+      <a href="/sparkles">← 記録一覧に戻る</a>
+    </div>
+  </article>
+</BlogLayout>
+
+<style>
+  .favorite-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .date {
+    color: #888;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+  }
+
+  .tags {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    color: #666;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    color: #1a1a1a;
+    border-bottom-color: #1a1a1a;
+  }
+
+  .favorite-content {
+    margin-bottom: 3rem;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    margin-bottom: 2rem;
+    background-color: #f8f8f8;
+    border: 1px solid #e8e8e8;
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .link-card {
+    padding: 2rem;
+    background-color: #f8f8f8;
+    border: 1px solid #e8e8e8;
+    margin-bottom: 2rem;
+  }
+
+  .link-card a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: none;
+    word-break: break-all;
+  }
+
+  .link-card a:hover {
+    color: #666;
+  }
+
+  .link-card svg {
+    flex-shrink: 0;
+  }
+
+  .description {
+    line-height: 2;
+  }
+
+  .back-link {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .back-link a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .back-link a:hover {
+    color: #1a1a1a;
+    border-bottom-color: #1a1a1a;
+  }
+
+  @media (max-width: 768px) {
+    .link-card {
+      padding: 1.5rem;
+    }
+
+    .link-card a {
+      font-size: 0.9rem;
+    }
+  }
+</style>

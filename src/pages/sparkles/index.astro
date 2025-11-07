@@ -1,0 +1,191 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+const allFavorites = await getCollection('sparkles');
+
+// 日付の新しい順にソート
+const sortedFavorites = allFavorites.sort((a, b) => {
+  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+});
+
+// URLからOGP情報を取得する関数（簡易版）
+function getUrlPreview(url: string) {
+  // YouTubeのサムネイル取得
+  const youtubeMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+  if (youtubeMatch) {
+    return {
+      type: 'youtube',
+      thumbnail: `https://img.youtube.com/vi/${youtubeMatch[1]}/maxresdefault.jpg`,
+      videoId: youtubeMatch[1]
+    };
+  }
+
+  // その他のURLの場合
+  return {
+    type: 'web',
+    thumbnail: null
+  };
+}
+---
+
+<BlogLayout
+  title="記録 - Sparkles"
+  description="感動したもの、心に残ったものを集めています"
+>
+  <h1 style="margin-bottom: 3rem;">記録</h1>
+
+  {sortedFavorites.length === 0 ? (
+    <p style="color: #666; margin-top: 2rem;">まだ記録がありません。</p>
+  ) : (
+    <div class="favorite-grid">
+      {sortedFavorites.map(favorite => {
+        const preview = getUrlPreview(favorite.data.url);
+        const formattedDate = new Date(favorite.data.date).toLocaleDateString('ja-JP', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+
+        return (
+          <article class="favorite-card">
+            <a href={`/sparkles/${favorite.slug}`} class="card-link">
+              {preview.thumbnail ? (
+                <div class="thumbnail">
+                  <img src={preview.thumbnail} alt="" loading="lazy" />
+                </div>
+              ) : (
+                <div class="thumbnail placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
+                </div>
+              )}
+
+              <div class="card-content">
+                <div class="card-meta">
+                  <span class="date">{formattedDate}</span>
+                </div>
+
+                {favorite.data.description && (
+                  <p class="description">{favorite.data.description}</p>
+                )}
+
+                {favorite.data.tags.length > 0 && (
+                  <div class="tags">
+                    {favorite.data.tags.map(tag => (
+                      <a href={`/sparkles/tags/${tag}`} class="tag">#{tag}</a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          </article>
+        );
+      })}
+    </div>
+  )}
+</BlogLayout>
+
+<style>
+  .favorite-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .favorite-card {
+    background-color: white;
+    border: 1px solid #e8e8e8;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .favorite-card:hover {
+    border-color: #d0d0d0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .favorite-card:hover .thumbnail img {
+    transform: scale(1.05);
+  }
+
+  .thumbnail.placeholder {
+    color: #d0d0d0;
+  }
+
+  .card-content {
+    padding: 1.2rem;
+  }
+
+  .card-meta {
+    margin-bottom: 0.8rem;
+  }
+
+  .date {
+    color: #888;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    color: #666;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    color: #1a1a1a;
+    border-bottom-color: #1a1a1a;
+  }
+
+  .description {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+    margin-top: 0;
+  }
+
+  @media (max-width: 768px) {
+    .favorite-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>
