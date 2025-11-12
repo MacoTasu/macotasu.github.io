@@ -1,3 +1,7 @@
+---
+// MacoTasu Portfolio Page
+---
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -10,7 +14,11 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html {
+            background-color: #fafafa;
+        }
+
         body {
             font-family: 'Crimson Text', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HG明朝E', 'MS P明朝', 'MS 明朝', serif;
             font-size: 18px;
@@ -18,18 +26,18 @@
             color: #1a1a1a;
             background-color: #fafafa;
             max-width: 680px;
-            margin: 0 auto;
+            margin: 0 auto !important;
             padding: 3rem 2rem;
             letter-spacing: 0.02em;
         }
-        
+
         header {
             text-align: center;
             margin-bottom: 4rem;
             padding-bottom: 3rem;
             border-bottom: 1px solid #d0d0d0;
         }
-        
+
         h1 {
             font-size: 2.2rem;
             font-weight: 300;
@@ -44,11 +52,11 @@
             letter-spacing: 0.15em;
             text-transform: uppercase;
         }
-        
+
         .section {
             margin-bottom: 3rem;
         }
-        
+
         .section h2 {
             font-size: 1.5rem;
             font-weight: 300;
@@ -57,15 +65,15 @@
             border-bottom: 1px solid #d0d0d0;
             letter-spacing: 0.03em;
         }
-        
+
         .links {
             list-style: none;
         }
-        
+
         .links li {
             margin-bottom: 0.8rem;
         }
-        
+
         .links a {
             color: #1a1a1a;
             text-decoration: none;
@@ -80,7 +88,7 @@
             color: #1a1a1a;
             border-bottom-color: #1a1a1a;
         }
-        
+
         .achievements {
             background-color: #f8f8f8;
             padding: 1.5rem;
@@ -99,7 +107,7 @@
             color: #666;
             font-size: 0.95rem;
         }
-        
+
         footer {
             margin-top: 6rem;
             padding-top: 3rem;
@@ -125,7 +133,7 @@
             color: #fafafa !important;
             border-color: #1a1a1a;
         }
-        
+
         .contact-info {
             margin-top: 1rem;
             color: #666;
@@ -140,11 +148,12 @@
             cursor: pointer;
             color: #1a1a1a;
             padding: 0.5rem 0;
-            display: inline-block;
+            display: block;
             border-bottom: 1px solid transparent;
             transition: all 0.3s ease;
             letter-spacing: 0.02em;
             list-style: none;
+            margin-left: -1.2em;
         }
 
         summary::-webkit-details-marker {
@@ -155,6 +164,7 @@
             content: '▸ ';
             display: inline-block;
             transition: transform 0.3s ease;
+            margin-right: 0.3em;
         }
 
         details[open] summary::before {
@@ -168,6 +178,7 @@
 
         details ul {
             margin-top: 0.5rem;
+            padding-left: 0;
         }
 
         @media (max-width: 768px) {
@@ -209,23 +220,27 @@
         </section>
 
         <section class="section">
-            <h2>登壇実績 / Speaking Achievements</h2>
-            <ul class="links">
-                <li><a href="https://speakerdeck.com/macotasu" target="_blank">SpeakerDeck - MacoTasu</a></li>
-                <li><a href="https://findy.connpass.com/event/371331/" target="_blank">Findy #技術組織を語る「アーキテクチャ年表 - 各社の意思決定の変遷と葛藤」(2025/10)</a></li>
-                <li><a href="https://speakerdeck.com/hacomono/business_growth_and_the_evolution_of_hacomono_architecture" target="_blank">事業成長とHACOMONOアーキテクチャの進化 (SpeakerDeck)</a></li>
-                <li><a href="https://speakerdeck.com/hacomono/rails-x-moziyuramonorisu" target="_blank">Rails x モジュラーモノリス (SpeakerDeck)</a></li>
-                <li><a href="https://techblog.hacomono.jp/entry/2023/08/22/110000" target="_blank">Railsでモジュラーモノリスを実現するための設計と実践 (2023/08/22)</a></li>
-                <li><a href="https://techblog.hacomono.jp/entry/2025/08/15/110000" target="_blank">モジュラーモノリスの設計・運用のリアル (2025/08/15)</a></li>
-            </ul>
+            <details>
+                <summary>登壇実績 / Speaking Achievements</summary>
+                <ul class="links">
+                    <li><a href="https://speakerdeck.com/macotasu" target="_blank">SpeakerDeck - MacoTasu</a></li>
+                    <li><a href="https://findy.connpass.com/event/371331/" target="_blank">Findy #技術組織を語る「アーキテクチャ年表 - 各社の意思決定の変遷と葛藤」(2025/10)</a></li>
+                    <li><a href="https://speakerdeck.com/hacomono/business_growth_and_the_evolution_of_hacomono_architecture" target="_blank">事業成長とHACOMONOアーキテクチャの進化 (SpeakerDeck)</a></li>
+                    <li><a href="https://speakerdeck.com/hacomono/rails-x-moziyuramonorisu" target="_blank">Rails x モジュラーモノリス (SpeakerDeck)</a></li>
+                    <li><a href="https://techblog.hacomono.jp/entry/2023/08/22/110000" target="_blank">Railsでモジュラーモノリスを実現するための設計と実践 (2023/08/22)</a></li>
+                    <li><a href="https://techblog.hacomono.jp/entry/2025/08/15/110000" target="_blank">モジュラーモノリスの設計・運用のリアル (2025/08/15)</a></li>
+                </ul>
+            </details>
         </section>
 
         <section class="section">
-            <h2>コンテスト実績 / Contest Achievements</h2>
-            <ul class="links">
-                <li><a href="https://macotasu.hatenablog.jp/entry/2017/10/23/004036" target="_blank">ISUCON7 予選敗退</a></li>
-                <li><a href="https://macotasu.hatenablog.jp/entry/2015/09/28/190442" target="_blank">ISUCON5 本選出場</a></li>
-            </ul>
+            <details>
+                <summary>コンテスト実績 / Contest Achievements</summary>
+                <ul class="links">
+                    <li><a href="https://macotasu.hatenablog.jp/entry/2017/10/23/004036" target="_blank">ISUCON7 予選敗退</a></li>
+                    <li><a href="https://macotasu.hatenablog.jp/entry/2015/09/28/190442" target="_blank">ISUCON5 本選出場</a></li>
+                </ul>
+            </details>
         </section>
     </main>
 
